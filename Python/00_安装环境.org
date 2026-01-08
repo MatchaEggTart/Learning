@@ -1,0 +1,66 @@
+#+title: 安装环境
+#+date: <2025-11-26 Wed>
+#+author: MatchaEggTart
+#+email: matchaeggtart@hotmail.com
+
+因为是 Linux，所以一句话就安装了
+
+* pip
+
+** WHAT
+
+pip 是 Python 的包管理工具，可以帮助我们安装三方库和三方工具
+直接使用 pip install 默认会将包安装到系统 Python 环境（如 /usr/lib/python3.x/site-packages/），这可能与 pacman 安装的包路径重叠，导致版本混乱、依赖冲突，甚至破坏系统工具（如 pacman 本身依赖某些 Python 模块）
+
+** HOW
+
+建议安装 pipx，优先使用官方仓库中的 Python 包
+
+
+* pipx
+
+** WHAT
+
+pipx 是 Arch 社区广泛推荐的解决方案
+自动创建独立虚拟环境：每个应用及其依赖隔离存放，互不干扰
+自动添加可执行文件到 PATH：安装后可直接在终端运行命令
+易于管理：支持 pipx upgrade, pipx uninstall 等操作
+符合 Arch 的“干净系统”理念：不会污染全局 Python 环境
+
+** HOW
+
+*** 安装
+
+#+begin_src shell
+sudo pacman -S python-pipx
+pipx ensurepath
+# sudo pipx ensurepath --global
+#+end_src
+
+*** 镜像
+
+path: $HOME/.config/pip/pip.conf
+
+#+begin_src js
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple/
+#+end_src
+
+*** 命令
+
+#+begin_src shell
+pipx install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple 包
+pipx list
+pipx uninstall 包
+pipx upgrade
+pipx upgrade-all
+#+end_src
+
+
+* python-ts-mode
+
+** 安装
+
+#+begin_src shell
+pipx install python-lsp-server
+#+end_src
