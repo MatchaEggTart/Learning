@@ -7,12 +7,12 @@ services:
     restart: always
     environment:
       POSTGRES_USER: matchaeggtart   # 替换为你想要的用户名
-      POSTGRES_PASSWORD: 12345       # 替换为你想要的密码
+      POSTGRES_PASSWORD: 123456      # 替换为你想要的密码
       POSTGRES_DB: test              # 可选：默认创建的数据库名
     ports:
       - "5432:5432"                  # 主机端口:容器端口
     volumes:
-      - ./postgres_data:/var/lib/postgresql  # 持久化数据
+      - $HOME/Workspace/PostgreSQL/postgres_data:/var/lib/postgresql  # 持久化数据
     networks:
       - postgres-net
 
