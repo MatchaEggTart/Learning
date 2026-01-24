@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      # PostgreSQL 18+ 的 Docker 容器配置，
+      # 应该将挂载点设置在 /var/lib/postgresql 而不是 /var/lib/postgresql/data
+      # - postgres-data:/var/lib/postgresql/data
+      # - postgres-data:/var/lib/postgresql # 修改这里
+      # 我嫌名字太长了
+      - data:/var/lib/postgresql # 修改这里
+    networks:
+      - postgres-net
+
+volumes:
+  # 这里必须对应services里面的volumes
+  # 这是以前的
+  # postgres-data:
+  data:
+
+networks:
+  postgres-net:
+    driver: bridge
+
